@@ -1,0 +1,24 @@
+┌──────────────────────────────────────────────────────────────┐
+│██████╗ ██╗      ██████╗ ██╗    ██╗███████╗██╗███████╗██╗  ██╗│
+│██╔══██╗██║     ██╔═══██╗██║    ██║██╔════╝██║██╔════╝██║  ██║│
+│██████╔╝██║     ██║   ██║██║ █╗ ██║█████╗  ██║███████╗███████║│
+│██╔══██╗██║     ██║   ██║██║███╗██║██╔══╝  ██║╚════██║██╔══██║│
+│██████╔╝███████╗╚██████╔╝╚███╔███╔╝██║     ██║███████║██║  ██║│
+│╚═════╝ ╚══════╝ ╚═════╝  ╚══╝╚══╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝│
+└──────────────────────────────────────────────────────────────┘
+By Tuan Dao | EECE 5640 | Sequential version
+File size = 1073741824, number of blocks = 134217728
+Key = TESTKEY, length = 7
+Key schedule complete!
+Original hash = 5546343f4a3f6e5e
+Encryption starts...
+Encryption done!
+Time taken: 28540.000000 milliseconds
+Average speed: 35.879467 MB/s
+Encrypted hash = a69d03f477e20265
+Decryption starts...
+Decryption done!
+Time taken: 28660.000000 milliseconds
+Average speed: 35.729239 MB/s
+Decrypted hash = 5546343f4a3f6e5e
+Hashes match! PASSED!
