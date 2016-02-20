@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 	double start, end, runtime;
 	// File variables
 	size_t filesize;
-	uint32_t *file = readfile(&filesize);
+	char *filepath = "../testfile";
+	uint32_t *file = readfile(&filesize, filepath);
 	size_t numblocks = filesize/sizeof(uint32_t); // Actually 2x numblocks
 	printf("File size = %zu, number of blocks = %zu\n", filesize, numblocks/2);
 	// Encryption key

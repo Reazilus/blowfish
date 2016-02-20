@@ -22,7 +22,7 @@ void blowfish_encryptblock 	(blowfish_context_t *ctx, uint32_t  *hi,  uint32_t *
 void blowfish_decryptblock 	(blowfish_context_t *ctx, uint32_t  *hi,  uint32_t *lo);
 int  blowfish_init     		(blowfish_context_t *ctx, char *key, size_t keybytes);
 void blowfish_clean        	(blowfish_context_t *ctx);
-void* readfile				(size_t *size);
+void* readfile				(size_t *size, char* filepath);
 void splashscreen			(void);
 uint64_t hash				(void* mem, size_t numblocks);
 
@@ -46,9 +46,9 @@ uint64_t hash (void* mem, size_t numblocks)
 	return ret;
 }
 
-void* readfile(size_t *size)
+void* readfile(size_t *size, char* filepath)
 {
-	FILE* input = fopen("../testfile", "r");
+	FILE* input = fopen(filepath, "r");
 	size_t filesize;
 	if (!input)
 	{
