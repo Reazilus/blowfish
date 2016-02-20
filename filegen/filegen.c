@@ -2,17 +2,21 @@
 #include <string.h>
 #include <stdlib.h>
 
-// 1MB File = 1048576 bytes
-// 1GB File = 1073741824 bytes
 #define MEGABYTE 1<<20
 #define GIGABYTE 1<<30
 
 int main(int argc, char const *argv[])
 {
-	srand(2195);
-	int i;
+	if (argc != 2)
+	{
+		printf("Usage: filegen <size in MB>\n");
+		exit(-1);
+	}
+	size_t i = 0, filesize = atoi(argv[1]) * MEGABYTE;
+	printf("Generating file of size %zu bytes\n", filesize);
 	FILE* output = fopen("../testfile", "w");
-	for (i = 0; i < GIGABYTE; ++i)
-		fputc(rand()%96+32, output);
+	srand(2195);
+	for (i = 0; i < filesize; ++i)
+		fputc(rand() & 0xFF, output);
 	return 0;
 }
