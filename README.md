@@ -1,2 +1,2 @@
 # blowfish
-Blowfish implementation in different 
+Blowfish implementation using different parallel programming libraries.
