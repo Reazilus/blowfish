@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
 	// Hash original file
 	hash_original = hash(file, numblocks);
-	printf("Original hash = %llx\n", hash_original);
+	printf("Original hash = %llx\n", (unsigned long long)hash_original);
 
 	//__________ENCRYPTION__________
 	printf("Encryption starts...\n");
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	printf("Average speed: %lf MB/s\n", (double)filesize/(runtime*MEGABYTE));
 
 	hash_encrypted = hash(file, numblocks);
-	printf("Encrypted hash = %llx\n", hash_encrypted);
+	printf("Encrypted hash = %llx\n", (unsigned long long)hash_encrypted);
 
 	//__________DECRYPTION__________
 	printf("Decryption starts...\n");
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	printf("Average speed: %lf MB/s\n", (double)filesize/(runtime*MEGABYTE));
 
 	hash_decrypted = hash(file, numblocks);
-	printf("Decrypted hash = %llx\n", hash_decrypted);
+	printf("Decrypted hash = %llx\n", (unsigned long long)hash_decrypted);
 
 	// Check
 	if (hash_decrypted == hash_original)
