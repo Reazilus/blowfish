@@ -2,29 +2,26 @@
 // Modified by Tuan Dao (2016)
 
 #include "blowfish.h"
+#include "implement.h"
 #include "const.h"
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <stdint.h>
 
 int main(int argc, char *argv[])
 {
 	splashscreen();
-	printf("By Tuan Dao | EECE 5640 | Sequential version\n");
-	// Misc counters
+	version();
+	// Misc variables
 	int status = 0;
-	size_t pos = 0;
 	uint64_t hash_original, hash_encrypted, hash_decrypted;
-	// Clock variables
-	clock_t start, end;
-	double runtime;
+	double runtime, rate;
 	// File variables
 	size_t filesize;
 	char *filepath = "../testfile";
 	uint32_t *file = readfile(&filesize, filepath);
-	size_t numblocks = filesize/sizeof(uint32_t); // Actually 2x numblocks
-	printf("File size = %zu, number of blocks = %zu\n", filesize, numblocks/2);
+	size_t numblocks = filesize/sizeof(uint32_t);
+	printf("File size = %zu bytes, numblocks = %zu\n", filesize, numblocks/2);
 	// Encryption key
 	char *key = "TESTKEY";
 	printf("Key = %s, length = %zu\n", key, strlen(key));
@@ -51,37 +48,23 @@ int main(int argc, char *argv[])
 	//__________ENCRYPTION__________
 	printf("Encryption starts...\n");
 
-	start = clock();
-	for (pos = 0; pos < numblocks; pos+=2)
-	{
-		blowfish_encryptblock(context, file+pos, file+pos+1);
-	}
-	end = clock();
-	runtime = ((double) (end - start)) /(double)CLOCKS_PER_SEC;
+	blowfish_encryptptr(context, file, numblocks, &runtime, &rate);
+	hash_encrypted = hash(file, numblocks);
 
 	printf("Encryption done!\n");
 	printf("Time taken: %lf milliseconds\n", runtime*1e3);
-	printf("Average speed: %lf MB/s\n", (double)filesize/(runtime*MEGABYTE));
-
-	hash_encrypted = hash(file, numblocks);
+	printf("Average speed: %lf MB/s\n", rate/MEGABYTE);
 	printf("Encrypted hash = %llx\n", (unsigned long long)hash_encrypted);
 
 	//__________DECRYPTION__________
 	printf("Decryption starts...\n");
 
-	start = clock();
-	for (pos = 0; pos < numblocks; pos+=2)
-	{
-		blowfish_decryptblock(context, file+pos, file+pos+1);
-	}
-	end = clock();
-	runtime = ((double) (end - start)) /(double)CLOCKS_PER_SEC;
+	blowfish_decryptptr(context, file, numblocks, &runtime, &rate);
+	hash_decrypted = hash(file, numblocks);
 
 	printf("Decryption done!\n");
 	printf("Time taken: %lf milliseconds\n", runtime*1e3);
-	printf("Average speed: %lf MB/s\n", (double)filesize/(runtime*MEGABYTE));
-
-	hash_decrypted = hash(file, numblocks);
+	printf("Average speed: %lf MB/s\n", rate/MEGABYTE);
 	printf("Decrypted hash = %llx\n", (unsigned long long)hash_decrypted);
 
 	// Check
