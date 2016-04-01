@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
-#include <omp.h>
 
 void version(void)
 {
