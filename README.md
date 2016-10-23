@@ -19,5 +19,4 @@ Explaination:
 
 - cuda5: CUDA version using pinned memory, streaming kernels and shared memory
 
-
-
+- filegen: random file generator utility for benchmarking purposes
